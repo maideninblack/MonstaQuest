@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class TogglePress : MonoBehaviour
 {
-	public void Pressed(int id)
+    public MonsterQuestLogic MQLinstance;
+	public void Pressed(int chordID)
     {
-        print("Se ha pulsado " + id);
+        print("Se ha pulsado " + chordID);
+
+        MQLinstance.AddChordToSelection(chordID);
     }
 }

@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class Chord
 {
-    public string id;
+    public int id;
     public int score;
 }

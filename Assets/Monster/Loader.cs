@@ -17,7 +17,7 @@ public class Loader : MonoBehaviour
             Instantiate(iterationsManager);
 
         //Check if a MonsterQuestLogic has already been assigned to static variable MonsterQuestLogic.instance or if it's still null
-        if (MonsterQuestLogic.instance == null)
+        if (MonsterQuestLogic.MQLinstance == null)
 
             //Instantiate MonsterQuestLogic prefab
             Instantiate(monsterQuestLogic);

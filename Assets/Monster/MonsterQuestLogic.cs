@@ -5,12 +5,16 @@ using UnityEngine.UI;
 
 public class MonsterQuestLogic : MonoBehaviour
 {
-    public static MonsterQuestLogic instance = null; // Static instance of MonsterQuestLogic which allows it to be accessed by any other script.
+    public static MonsterQuestLogic MQLinstance = null; // Static instance of MonsterQuestLogic which allows it to be accessed by any other script.
 
     public const int MAX_CHORDS = 20;
     public const int MAX_TESTS = 5;
 
+    public const int MAX_SELECTED_CHORDS = 5;
+
     public int testNumber;
+
+    public int playerScore;
 
     // Declaración array de tipo Chord
     Chord[] chords;
@@ -36,19 +40,16 @@ public class MonsterQuestLogic : MonoBehaviour
 
     public Hashtable iterationTests; // Hashtable es una versión avanzada de los Dictionaries, con esto tengo un mapa de los tests que hay en cada una de las iteraciones, respectivamente (a cada iteración le corresponde un test)
 
-    // UI
-    public Button okButton; 
-
     void Awake()
     {
         //Check if instance already exists
-        if (instance == null)
+        if (MQLinstance == null)
 
             //if not, set instance to this
-            instance = this;
+            MQLinstance = this;
 
         //If instance already exists and it's not this:
-        else if (instance != this)
+        else if (MQLinstance != this)
 
             //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
             Destroy(gameObject);
@@ -71,8 +72,7 @@ public class MonsterQuestLogic : MonoBehaviour
 
         chordsSelection = new Dictionary<int, Chord>();
 
-        // UI
-        okButton.GetComponent<Button>();
+        HomeworkFix();
     }
 	
 	void Update ()
@@ -167,18 +167,92 @@ public class MonsterQuestLogic : MonoBehaviour
         }
     }
 
-    void ValidateTest(int currentTest)
+    // Tenemos que llamar esta funcion en un script que lleve el botón OK
+    void ValidateTest()
     {
-        TestGenerator(currentTest);
+        bool areAllSelected = true;
+        // Primero hay que comprobar que estén los 5 seleccionados
+        for (int i = 0; i < MAX_SELECTED_CHORDS; i++)
+        {
+            if (!chordsSelection.ContainsKey(i))
+            {
+                areAllSelected = false;
+            }
+        }
+
+        if (areAllSelected)
+        {
+            for (int i = 0; i < MAX_SELECTED_CHORDS; i++)
+            {
+                playerScore += chordsSelection[i].score;
+            }
+        }
     }
 
     public void AddChordToSelection(int chordID)
     {
-
+        for (int i = 0; i < MAX_SELECTED_CHORDS; i++)
+        {
+            if (!chordsSelection.ContainsKey(i))
+            {
+                foreach (Chord chord in chords) // por cada elemento o pointer del array... (el nombre chord se lo doy yo aquí en el foreach)
+                {
+                    if (chord.id.Equals(chordID)) // cuando el ID del chord actual (el que está recorriendo el foreach in that moment) es igual que el que ha elegido el player
+                    {
+                        chordsSelection.Add(i, chord); // i es la key (0, 1, 2, 3 o 4) y chord el value
+                        break;
+                    }
+                }
+                break;
+            }
+        }
     }
 
     public void RemoveChordFromSelection(int chordID)
     {
 
+    }
+
+    private void HomeworkFix()
+    {
+        for (int i = 0; i < MAX_CHORDS; i++)
+        {
+            chords[i] = new Chord();
+            chords[i].id = i + 1;
+        }
+        // Además del trigger por defecto (que el collider tenga tag Player) aquí se hace la pregunta de que la key IterationsManager.iterationNumber de la hashtable iterationTests no exista, como requisito para el if
+        // Si este valor de la hashtable es null quiere decir que no hay test asignado en la iteración actual
+        if (iterationTests[IterationsManager.iterationNumber] == null)
+        {
+            Debug.Log("Monster encounter!");
+
+            bool newTest = false; // Este bool lo usaré para controlar que el test que va a dársele al player no lo ha efectuado ya antes
+
+            while (newTest == false) // Mientras no sea un test nuevo... Yo voy a seguir intentando generar un test nuevo (para que no se repita)
+            {
+                testNumber = Random.Range(1, 6); // Genero un número de test aleatorio para intentar que no se repita
+
+                foreach (int test in doneTests) // Este foreach me recorre el array doneTests, y por cada test (cada uno de los tests realizados)...
+                {
+                    if (testNumber != test) // Si el test generado no está en el array doneTests...
+                    {
+                        newTest = true; // Entonces es un nuevo test!
+                    }
+                    else // PERO si encuentra una coincidencia
+                    {
+                        newTest = false; // No es un nuevo test y me devuelve newTest a false
+                        break; // Y se hace un break del foreach
+                    }
+                }
+            }
+            // Necesito que doneTests sea un dato tipo lista para usar el método Add
+            //Ahora tengo que actualizar con el testNumber nuevo la lista de tests doneTest, que el jugador ya ha hecho
+            doneTests.Add(testNumber);
+
+            iterationTests.Add(IterationsManager.iterationNumber, testNumber); // Añadimos a la hashtable IterationTests el número de test que ha salido (1-5) y luego se le asigna este valor a la key IterationsManager.iterationNumber, que es la iteración actual
+                                                                               // !!!!!!! NOTA: hay que programar la lógica de que cada cambio de iteración actualice IterationsManager.iterationNumber según en la que estemos
+
+            TestGenerator(testNumber);
+        }
     }
 }
