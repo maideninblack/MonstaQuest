@@ -28,7 +28,7 @@ public class IterationsManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         iterationNumber = 1;
-
+        lastIterationPlayed = 1;
     }
 	
 	void Update ()

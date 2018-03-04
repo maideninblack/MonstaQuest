@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testNumber: 0
-  okButton: {fileID: 0}
+  playerScore: 0
 --- !u!114 &3334511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,6 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aee6571805ff9614ea69d7e85f7fbec0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MQLinstance: {fileID: 0}
 --- !u!1 &8794429
 GameObject:
   m_ObjectHideFlags: 0
@@ -3247,6 +3248,48 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
+--- !u!1001 &850213692
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4923905607108444, guid: d1a1309c3d7fac34b87716c9a5e374cb, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 136.57422
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923905607108444, guid: d1a1309c3d7fac34b87716c9a5e374cb, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 234.84375
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923905607108444, guid: d1a1309c3d7fac34b87716c9a5e374cb, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 139.375
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923905607108444, guid: d1a1309c3d7fac34b87716c9a5e374cb, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923905607108444, guid: d1a1309c3d7fac34b87716c9a5e374cb, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923905607108444, guid: d1a1309c3d7fac34b87716c9a5e374cb, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923905607108444, guid: d1a1309c3d7fac34b87716c9a5e374cb, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923905607108444, guid: d1a1309c3d7fac34b87716c9a5e374cb, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: d1a1309c3d7fac34b87716c9a5e374cb, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &878290633
 GameObject:
   m_ObjectHideFlags: 0
@@ -5411,48 +5454,6 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
---- !u!1 &1603419169
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1603419171}
-  - component: {fileID: 1603419170}
-  m_Layer: 0
-  m_Name: QuestLogic
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1603419170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1603419169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51b9c843ad8200e4f81558a1a83b8223, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  testNumber: 0
-  okButton: {fileID: 654779733}
---- !u!4 &1603419171
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1603419169}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 136.57422, y: 234.84375, z: 139.375}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1611701304
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,7 +17,7 @@ public class MonsterQuestLogic : MonoBehaviour
     public int playerScore;
 
     // Declaración array de tipo Chord
-    Chord[] chords;
+    List <Chord> chords;
 
     public Dictionary<int, Chord> chordsSelection;
 
@@ -57,7 +57,7 @@ public class MonsterQuestLogic : MonoBehaviour
         //Set this to not be destroyed when reloading scene
         DontDestroyOnLoad(gameObject);
 
-        chords = new Chord[MAX_CHORDS]; // Asignamos el tamaño al array de acordes: 20 en cada test
+        chords = new List<Chord>(); // NO APLICA: Asignamos el tamaño al array de acordes: 20 en cada test
 
         melancholicTest = new int[] {1, 1, 1, 1, 5, 5, 5, 5, 4, 4, 4, 4, 3, 3, 3, 3, 2, 2, 2, 2};
         naughtyTest = new int[]     {2, 2, 2, 2, 1, 1, 1, 1, 5, 5, 5, 5, 4, 4, 4, 4, 3, 3, 3, 3};
@@ -72,7 +72,7 @@ public class MonsterQuestLogic : MonoBehaviour
 
         chordsSelection = new Dictionary<int, Chord>();
 
-        HomeworkFix();
+        //HomeworkFix();
     }
 	
 	void Update ()
@@ -113,7 +113,7 @@ public class MonsterQuestLogic : MonoBehaviour
         }
         
         // Los scores de cada acorde (20 en total) se cambian a los del tipo de test que haya tocado en el switch de arriba
-        for (int i = 0; i < chords.Length; i++)
+        for (int i = 0; i < MAX_CHORDS; i++)
         {
             chords[i].score = defaultTest[i];
         }
@@ -215,11 +215,11 @@ public class MonsterQuestLogic : MonoBehaviour
 
     private void HomeworkFix()
     {
-        for (int i = 0; i < MAX_CHORDS; i++)
+        /*for (int i = 0; i < MAX_CHORDS; i++)
         {
-            chords[i] = new Chord();
+            chords.Add(new Chord());
             chords[i].id = i + 1;
-        }
+        }*/
         // Además del trigger por defecto (que el collider tenga tag Player) aquí se hace la pregunta de que la key IterationsManager.iterationNumber de la hashtable iterationTests no exista, como requisito para el if
         // Si este valor de la hashtable es null quiere decir que no hay test asignado en la iteración actual
         if (iterationTests[IterationsManager.iterationNumber] == null)
