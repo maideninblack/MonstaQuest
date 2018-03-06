@@ -40,6 +40,9 @@ public class MonsterQuestLogic : MonoBehaviour
 
     public Hashtable iterationTests; // Hashtable es una versión avanzada de los Dictionaries, con esto tengo un mapa de los tests que hay en cada una de las iteraciones, respectivamente (a cada iteración le corresponde un test)
 
+    bool homeworkFixControl;
+    int homeworkFixFramesCounter;
+
     void Awake()
     {
         //Check if instance already exists
@@ -72,13 +75,23 @@ public class MonsterQuestLogic : MonoBehaviour
 
         chordsSelection = new Dictionary<int, Chord>();
 
-        //HomeworkFix();
+        homeworkFixControl = true;
+        homeworkFixFramesCounter = 0;
     }
 	
 	void Update ()
     {
-		
-	}
+        if (homeworkFixControl)
+        {
+            homeworkFixFramesCounter++;
+            if (homeworkFixFramesCounter > 30)
+            {
+                print("Se llama a la inicialización del test");
+                HomeworkFix();
+                homeworkFixControl = false;
+            }
+        }
+    }
 
     void TestGenerator(int testNumber)
     {
@@ -126,7 +139,7 @@ public class MonsterQuestLogic : MonoBehaviour
         {
             // Además del trigger por defecto (que el collider tenga tag Player) aquí se hace la pregunta de que la key IterationsManager.iterationNumber de la hashtable iterationTests no exista, como requisito para el if
             // Si este valor de la hashtable es null quiere decir que no hay test asignado en la iteración actual
-            if (iterationTests[IterationsManager.iterationNumber] == null)
+            if (iterationTests[IterationsManager.iterationInstance.iterationNumber] == null)
             {
                 Debug.Log("Monster encounter!");
 
@@ -136,24 +149,29 @@ public class MonsterQuestLogic : MonoBehaviour
                 {
                     testNumber = Random.Range(1, 6); // Genero un número de test aleatorio para intentar que no se repita
 
-                    foreach (int test in doneTests) // Este foreach me recorre el array doneTests, y por cada test (cada uno de los tests realizados)...
+                    if (doneTests.Count > 0)
                     {
-                        if (testNumber != test) // Si el test generado no está en el array doneTests...
+                        foreach (int test in doneTests) // Este foreach me recorre el array doneTests, y por cada test (cada uno de los tests realizados)...
                         {
-                            newTest = true; // Entonces es un nuevo test!
-                        }
-                        else // PERO si encuentra una coincidencia
-                        {
-                            newTest = false; // No es un nuevo test y me devuelve newTest a false
-                            break; // Y se hace un break del foreach
+                            if (testNumber != test) // Si el test generado no está en el array doneTests...
+                            {
+                                newTest = true; // Entonces es un nuevo test!
+                            }
+                            else // PERO si encuentra una coincidencia
+                            {
+                                newTest = false; // No es un nuevo test y me devuelve newTest a false
+                                break; // Y se hace un break del foreach
+                            }
                         }
                     }
+                    else
+                        newTest = true;
                 }
                 // Necesito que doneTests sea un dato tipo lista para usar el método Add
                 //Ahora tengo que actualizar con el testNumber nuevo la lista de tests doneTest, que el jugador ya ha hecho
                 doneTests.Add(testNumber);
 
-                iterationTests.Add(IterationsManager.iterationNumber, testNumber); // Añadimos a la hashtable IterationTests el número de test que ha salido (1-5) y luego se le asigna este valor a la key IterationsManager.iterationNumber, que es la iteración actual
+                iterationTests.Add(IterationsManager.iterationInstance.iterationNumber, testNumber); // Añadimos a la hashtable IterationTests el número de test que ha salido (1-5) y luego se le asigna este valor a la key IterationsManager.iterationNumber, que es la iteración actual
                                                                                    // !!!!!!! NOTA: hay que programar la lógica de que cada cambio de iteración actualice IterationsManager.iterationNumber según en la que estemos
 
                 TestGenerator(testNumber);
@@ -168,7 +186,7 @@ public class MonsterQuestLogic : MonoBehaviour
     }
 
     // Tenemos que llamar esta funcion en un script que lleve el botón OK
-    void ValidateTest()
+    public void ValidateTest()
     {
         bool areAllSelected = true;
         // Primero hay que comprobar que estén los 5 seleccionados
@@ -186,73 +204,111 @@ public class MonsterQuestLogic : MonoBehaviour
             {
                 playerScore += chordsSelection[i].score;
             }
+
+            print("Score: " + playerScore.ToString());
         }
     }
 
-    public void AddChordToSelection(int chordID)
+    public void ChangeChordToSelection(int chordID)
     {
-        for (int i = 0; i < MAX_SELECTED_CHORDS; i++)
+        bool isPressed = true;
+
+        foreach (KeyValuePair<int, Chord> chordPair in chordsSelection)
         {
-            if (!chordsSelection.ContainsKey(i))
+            if(chordPair.Value.id.Equals(chordID))
             {
-                foreach (Chord chord in chords) // por cada elemento o pointer del array... (el nombre chord se lo doy yo aquí en el foreach)
-                {
-                    if (chord.id.Equals(chordID)) // cuando el ID del chord actual (el que está recorriendo el foreach in that moment) es igual que el que ha elegido el player
-                    {
-                        chordsSelection.Add(i, chord); // i es la key (0, 1, 2, 3 o 4) y chord el value
-                        break;
-                    }
-                }
-                break;
+                chordsSelection.Remove(chordPair.Key);
+                isPressed = false;
+                Debug.Log("Se borra: " + chordID);
             }
         }
-    }
-
-    public void RemoveChordFromSelection(int chordID)
-    {
-
-    }
-
-    private void HomeworkFix()
-    {
-        for (int i = 0; i < MAX_CHORDS; i++)
+        if (isPressed)
         {
-            chords.Add(new Chord());
-            chords[i].id = i + 1;
-        }
-        // Además del trigger por defecto (que el collider tenga tag Player) aquí se hace la pregunta de que la key IterationsManager.iterationNumber de la hashtable iterationTests no exista, como requisito para el if
-        // Si este valor de la hashtable es null quiere decir que no hay test asignado en la iteración actual
-        if (iterationTests[IterationsManager.iterationNumber] == null)
-        {
-            Debug.Log("Monster encounter!");
-
-            bool newTest = false; // Este bool lo usaré para controlar que el test que va a dársele al player no lo ha efectuado ya antes
-
-            while (newTest == false) // Mientras no sea un test nuevo... Yo voy a seguir intentando generar un test nuevo (para que no se repita)
+            for (int i = 0; i < MAX_SELECTED_CHORDS; i++)
             {
-                testNumber = Random.Range(1, 6); // Genero un número de test aleatorio para intentar que no se repita
-
-                foreach (int test in doneTests) // Este foreach me recorre el array doneTests, y por cada test (cada uno de los tests realizados)...
+                if (!chordsSelection.ContainsKey(i))
                 {
-                    if (testNumber != test) // Si el test generado no está en el array doneTests...
+                    foreach (Chord chord in chords) // por cada elemento o pointer del array... (el nombre chord se lo doy yo aquí en el foreach)
                     {
-                        newTest = true; // Entonces es un nuevo test!
+                        if (chord.id.Equals(chordID)) // cuando el ID del chord actual (el que está recorriendo el foreach in that moment) es igual que el que ha elegido el player
+                        {
+                            chordsSelection.Add(i, chord); // i es la key (0, 1, 2, 3 o 4) y chord el value
+                            Debug.Log("Se añade: " + chordID);
+                            break;
+                        }
                     }
-                    else // PERO si encuentra una coincidencia
-                    {
-                        newTest = false; // No es un nuevo test y me devuelve newTest a false
-                        break; // Y se hace un break del foreach
-                    }
+                    break;
                 }
             }
-            // Necesito que doneTests sea un dato tipo lista para usar el método Add
-            //Ahora tengo que actualizar con el testNumber nuevo la lista de tests doneTest, que el jugador ya ha hecho
-            doneTests.Add(testNumber);
-
-            iterationTests.Add(IterationsManager.iterationNumber, testNumber); // Añadimos a la hashtable IterationTests el número de test que ha salido (1-5) y luego se le asigna este valor a la key IterationsManager.iterationNumber, que es la iteración actual
-                                                                               // !!!!!!! NOTA: hay que programar la lógica de que cada cambio de iteración actualice IterationsManager.iterationNumber según en la que estemos
-
-            TestGenerator(testNumber);
         }
+        Debug.Log("Actualmente pulsados:");
+        foreach (KeyValuePair<int, Chord> chord in chordsSelection)
+        {
+            Debug.Log(chord.Value.id);
+        }
+        Debug.Log("====================================");
+    }
+
+    public void HomeworkFix()
+    {
+        print("Se empieza la inicialización del test");
+        if (chords != null)
+        {
+            print("Hay chords");
+            for (int i = 0; i < MAX_CHORDS; i++)
+            {
+                chords.Add(new Chord());
+                if (chords[i] != null)
+                    chords[i].id = i + 1;
+            }
+        }
+        else
+            print("NO hay chords");
+        if (IterationsManager.iterationInstance != null)
+        {
+            // Además del trigger por defecto (que el collider tenga tag Player) aquí se hace la pregunta de que la key IterationsManager.iterationNumber de la hashtable iterationTests no exista, como requisito para el if
+            // Si este valor de la hashtable es null quiere decir que no hay test asignado en la iteración actual
+            if (iterationTests[IterationsManager.iterationInstance.iterationNumber] == null)
+            {
+                Debug.Log("Monster encounter!");
+
+                bool newTest = false; // Este bool lo usaré para controlar que el test que va a dársele al player no lo ha efectuado ya antes
+
+                while (newTest == false) // Mientras no sea un test nuevo... Yo voy a seguir intentando generar un test nuevo (para que no se repita)
+                {
+                    testNumber = Random.Range(1, 6); // Genero un número de test aleatorio para intentar que no se repita
+
+                    if (doneTests.Count > 0)
+                    {
+                        foreach (int test in doneTests) // Este foreach me recorre el array doneTests, y por cada test (cada uno de los tests realizados)...
+                        {
+                            if (testNumber != test) // Si el test generado no está en el array doneTests...
+                            {
+                                newTest = true; // Entonces es un nuevo test!
+                            }
+                            else // PERO si encuentra una coincidencia
+                            {
+                                newTest = false; // No es un nuevo test y me devuelve newTest a false
+                                break; // Y se hace un break del foreach
+                            }
+                        }
+                    }
+                    else
+                        newTest = true;
+                }
+                // Necesito que doneTests sea un dato tipo lista para usar el método Add
+                //Ahora tengo que actualizar con el testNumber nuevo la lista de tests doneTest, que el jugador ya ha hecho
+                doneTests.Add(testNumber);
+
+                iterationTests.Add(IterationsManager.iterationInstance.iterationNumber, testNumber); // Añadimos a la hashtable IterationTests el número de test que ha salido (1-5) y luego se le asigna este valor a la key IterationsManager.iterationNumber, que es la iteración actual
+                                                                                                     // !!!!!!! NOTA: hay que programar la lógica de que cada cambio de iteración actualice IterationsManager.iterationNumber según en la que estemos
+
+                Debug.Log("Llamamos al test generator");
+                TestGenerator(testNumber);
+            }
+            print("Se ha finalizado la inicialización del test");
+        }
+        else
+            print("NO se ha finalizado la inicialización del test");
     }
 }

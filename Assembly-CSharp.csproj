@@ -55,6 +55,7 @@
      <Compile Include="Assets\Monster\IterationsManager.cs" />
      <Compile Include="Assets\Monster\Loader.cs" />
      <Compile Include="Assets\Monster\MonsterQuestLogic.cs" />
+     <Compile Include="Assets\Monster\OkPress.cs" />
      <Compile Include="Assets\Monster\TogglePress.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

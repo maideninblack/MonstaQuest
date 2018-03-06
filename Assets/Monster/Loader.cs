@@ -11,7 +11,7 @@ public class Loader : MonoBehaviour
     void Awake()
     {
         //Check if an IterationsManager has already been assigned to static variable IterationsManager.instance or if it's still null
-        if (IterationsManager.instance == null)
+        if (IterationsManager.iterationInstance == null)
 
             //Instantiate IterationsManager prefab
             Instantiate(iterationsManager);
