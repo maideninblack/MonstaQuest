@@ -122,7 +122,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3334508}
   - component: {fileID: 3334510}
-  - component: {fileID: 3334509}
   - component: {fileID: 3334511}
   m_Layer: 5
   m_Name: Chords
@@ -169,17 +168,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3334509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 3334507}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2a7dc4ea0761d247872ac46eb03cd7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3334510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6773,8 +6761,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eb6623dced1d9f4d9f3f8ab4838af17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iterationsManager: {fileID: 0}
-  monsterQuestLogic: {fileID: 1397467886736032, guid: 1bfdb624baf55ce4c93ee23535fb82d4,
+  iterationsManager: {fileID: 1773989863310932, guid: 746b9ffe6e244c140bab34ff1d4f69d7,
+    type: 2}
+  monsterQuestLogic: {fileID: 1112311552936792, guid: d1a1309c3d7fac34b87716c9a5e374cb,
     type: 2}
 --- !u!1 &2098595473
 GameObject:

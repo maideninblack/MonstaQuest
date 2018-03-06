@@ -215,11 +215,11 @@ public class MonsterQuestLogic : MonoBehaviour
 
     private void HomeworkFix()
     {
-        /*for (int i = 0; i < MAX_CHORDS; i++)
+        for (int i = 0; i < MAX_CHORDS; i++)
         {
             chords.Add(new Chord());
             chords[i].id = i + 1;
-        }*/
+        }
         // Además del trigger por defecto (que el collider tenga tag Player) aquí se hace la pregunta de que la key IterationsManager.iterationNumber de la hashtable iterationTests no exista, como requisito para el if
         // Si este valor de la hashtable es null quiere decir que no hay test asignado en la iteración actual
         if (iterationTests[IterationsManager.iterationNumber] == null)
