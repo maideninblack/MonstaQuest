@@ -52,9 +52,6 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Monster\Chord.cs" />
-     <Compile Include="Assets\Monster\CleanMonsterQuest.cs" />
-     <Compile Include="Assets\Monster\IterationsManager.cs" />
-     <Compile Include="Assets\Monster\Loader.cs" />
      <Compile Include="Assets\Monster\MonsterQuestLogic.cs" />
      <Compile Include="Assets\Monster\OkPress.cs" />
      <Compile Include="Assets\Monster\TogglePress.cs" />
