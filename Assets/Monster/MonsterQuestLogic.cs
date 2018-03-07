@@ -9,42 +9,37 @@ public class MonsterQuestLogic : MonoBehaviour
 
     public const int MAX_CHORDS = 20;
     public const int MAX_TESTS = 5;
-
     public const int MAX_SELECTED_CHORDS = 5;
 
     public int testNumber;
 
-    public int playerScore;
+    public int playerScore; // este será el score del player, la suma, y luego tenemos el Chord.score
 
-    // Declaración array de tipo Chord
+    // Declaración array de Chord
     List <Chord> chords;
 
-    public Dictionary<int, Chord> chordsSelection;
+    public Dictionary<int, Chord> chordsSelection; // diccionario de chords seleccionados con su key (int)
 
-    // Array de scores/valores que tiene cada chord en cada test
+    // Array para los scores que tiene cada chord en cada test
     int[] melancholicTest;
     int[] naughtyTest;
     int[] tenderTest;
     int[] cheerfulTest;
     int[] bizarreTest;
 
-    /* 
-    --- ALTERNATIVE TESTS ---
-    int[] epicTest;
-    int[] sadTest;
-    int[] spookyTest;
-    */
-
-    // Declaración array de ints donde almacenemos las pruebas que ya se han hecho para que no se repitan
+    // Declaración lista de ints donde almacenemos las pruebas que ya se han hecho para que no se repitan
     List<int> doneTests;
-
-    public Hashtable iterationTests; // Hashtable es una versión avanzada de los Dictionaries, con esto tengo un mapa de los tests que hay en cada una de las iteraciones, respectivamente (a cada iteración le corresponde un test)
+    
+    // Hashtable es una versión avanzada de los Dictionaries, con esto tengo un mapa de los tests que hay en cada una de las iteraciones, 
+    // respectivamente (a cada iteración le corresponde un test)
+    public Hashtable iterationTests; 
 
     bool homeworkFixControl;
     int homeworkFixFramesCounter;
 
     void Awake()
     {
+        // SINGLETON -----------------------------------------------
         //Check if instance already exists
         if (MQLinstance == null)
 
@@ -59,22 +54,25 @@ public class MonsterQuestLogic : MonoBehaviour
 
         //Set this to not be destroyed when reloading scene
         DontDestroyOnLoad(gameObject);
+        // SINGLETON -----------------------------------------------
 
-        chords = new List<Chord>(); // NO APLICA: Asignamos el tamaño al array de acordes: 20 en cada test
+        chords = new List<Chord>(); // Inicializo la lista de chords
 
+        // esto le llegará a defaultTest, de momento ponemos estos valores y luego quizá los inicializamos desde editor, mejor...
         melancholicTest = new int[] {1, 1, 1, 1, 5, 5, 5, 5, 4, 4, 4, 4, 3, 3, 3, 3, 2, 2, 2, 2};
         naughtyTest = new int[]     {2, 2, 2, 2, 1, 1, 1, 1, 5, 5, 5, 5, 4, 4, 4, 4, 3, 3, 3, 3};
         tenderTest = new int[]      {3, 3, 3, 3, 2, 2, 2, 2, 1, 1, 1, 1, 5, 5, 5, 5, 4, 4, 4, 4};
         cheerfulTest = new int[]    {4, 4, 4, 4, 3, 3, 3, 3, 2, 2, 2, 2, 1, 1, 1, 1, 5, 5, 5, 5};
         bizarreTest = new int[]     {5, 5, 5, 5, 4, 4, 4, 4, 3, 3, 3, 3, 2, 2, 2, 2, 1, 1, 1, 1};
 
-        // Necesito que doneTests sea un dato tipo lista para usar el método Add
+        // Necesito que doneTests sea un dato tipo lista para poder usar el método Add
         doneTests = new List<int>();
 
         iterationTests = new Hashtable(); // Inicializo la hashtable de tests
 
         chordsSelection = new Dictionary<int, Chord>();
 
+        // llamo así (tag "homeworkFix") a las cosas que habrá que cambiar de cara a la implementación del juego final, de momento son un parche
         homeworkFixControl = true;
         homeworkFixFramesCounter = 0;
     }
@@ -95,7 +93,7 @@ public class MonsterQuestLogic : MonoBehaviour
 
     void TestGenerator(int testNumber)
     {
-        // Me creo una variable volátil, defaultTest, donde almacenaré el array de scores/valores de los acordes de cada test, en función del tipo del testNumber y del tipo de test que toque en él
+        // Me creo una variable volátil, defaultTest, donde almacenaré el array de scores de los acordes de cada test, en función del tipo del testNumber y del tipo de test que toque en él
         int[] defaultTest = new int[MAX_CHORDS]; 
 
         // Hago un switch de cases de testNumber, que tendrá un case por cada número de test (es decir, por cada iteración)
@@ -132,12 +130,13 @@ public class MonsterQuestLogic : MonoBehaviour
         }
     }
 
-    // Esto lo cambiaré cuando decidamos cómo marcamos cuándo un test ha sido ya triggereado. P.e. después de diálogo con Monster. Con bool?
+    // Esto lo cambiaré cuando decidamos cómo marcamos cuándo un test ha sido ya triggereado. P.e. después de diálogo con Monster. 
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            // Además del trigger por defecto (que el collider tenga tag Player) aquí se hace la pregunta de que la key IterationsManager.iterationNumber de la hashtable iterationTests no exista, como requisito para el if
+            // Además del trigger por defecto (que el collider tenga tag Player) aquí se hace la pregunta de que la key 
+            // IterationsManager.iterationNumber de la hashtable iterationTests no exista, como requisito para el if
             // Si este valor de la hashtable es null quiere decir que no hay test asignado en la iteración actual
             if (iterationTests[IterationsManager.iterationInstance.iterationNumber] == null)
             {
@@ -165,14 +164,17 @@ public class MonsterQuestLogic : MonoBehaviour
                         }
                     }
                     else
-                        newTest = true;
+
+                    newTest = true;
                 }
                 // Necesito que doneTests sea un dato tipo lista para usar el método Add
                 //Ahora tengo que actualizar con el testNumber nuevo la lista de tests doneTest, que el jugador ya ha hecho
                 doneTests.Add(testNumber);
 
-                iterationTests.Add(IterationsManager.iterationInstance.iterationNumber, testNumber); // Añadimos a la hashtable IterationTests el número de test que ha salido (1-5) y luego se le asigna este valor a la key IterationsManager.iterationNumber, que es la iteración actual
-                                                                                   // !!!!!!! NOTA: hay que programar la lógica de que cada cambio de iteración actualice IterationsManager.iterationNumber según en la que estemos
+
+                // Añadimos a la hashtable IterationTests el número de test que ha salido (1-5) y luego se le asigna este valor a la key IterationsManager.iterationNumber, que es la iteración actual
+                // !!!!!!! NOTA: hay que programar la lógica de que cada cambio de iteración actualice IterationsManager.iterationNumber según en la que estemos
+                iterationTests.Add(IterationsManager.iterationInstance.iterationNumber, testNumber); 
 
                 TestGenerator(testNumber);
 
@@ -185,16 +187,18 @@ public class MonsterQuestLogic : MonoBehaviour
         }
     }
 
+
     // Tenemos que llamar esta funcion en un script que lleve el botón OK
     public void ValidateTest()
     {
         bool areAllSelected = true;
+
         // Primero hay que comprobar que estén los 5 seleccionados
         for (int i = 0; i < MAX_SELECTED_CHORDS; i++)
         {
-            if (!chordsSelection.ContainsKey(i))
+            if (!chordsSelection.ContainsKey(i)) // En el momento en el que encuentre uno que no esté presente, expresado en la función ContainsKey(i)...
             {
-                areAllSelected = false;
+                areAllSelected = false; // ... Pues pongo areAllSelected a false, porque hay al menos un hueco y por tanto se puede rellenar con otro valor
             }
         }
 
@@ -209,6 +213,9 @@ public class MonsterQuestLogic : MonoBehaviour
         }
     }
 
+
+
+    // Aquí haré tanto el añadir chord to selection (antiguo AddChordToSelecteion()) como el remove -> TODO!!!
     public void ChangeChordToSelection(int chordID)
     {
         bool isPressed = true;
@@ -222,6 +229,7 @@ public class MonsterQuestLogic : MonoBehaviour
                 Debug.Log("Se borra: " + chordID);
             }
         }
+
         if (isPressed)
         {
             for (int i = 0; i < MAX_SELECTED_CHORDS; i++)
@@ -241,6 +249,7 @@ public class MonsterQuestLogic : MonoBehaviour
                 }
             }
         }
+
         Debug.Log("Actualmente pulsados:");
         foreach (KeyValuePair<int, Chord> chord in chordsSelection)
         {
@@ -248,6 +257,8 @@ public class MonsterQuestLogic : MonoBehaviour
         }
         Debug.Log("====================================");
     }
+
+
 
     public void HomeworkFix()
     {
@@ -264,6 +275,8 @@ public class MonsterQuestLogic : MonoBehaviour
         }
         else
             print("NO hay chords");
+
+
         if (IterationsManager.iterationInstance != null)
         {
             // Además del trigger por defecto (que el collider tenga tag Player) aquí se hace la pregunta de que la key IterationsManager.iterationNumber de la hashtable iterationTests no exista, como requisito para el if
