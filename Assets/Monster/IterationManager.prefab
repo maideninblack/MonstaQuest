@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4160920631634852}
   - component: {fileID: 114200812840688190}
   m_Layer: 0
-  m_Name: IterationObject
+  m_Name: IterationManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,3 +51,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95e37c1805c8c3f418adb939978a9934, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  iterationNumber: 0
+  lastIterationPlayed: 0
