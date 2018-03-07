@@ -30,13 +30,12 @@ public class CleanMonsterQuest : MonoBehaviour
     int[] tenderTest;
     int[] cheerfulTest;
     int[] bizarreTest;
-    int[] sadTest;
 
     void Start()
     {
         playerScore = 0;
 
-        testNumber = 0; // Nunca funcionará valiendo 0 (ha de ser 1-6 que se lo daré con Random.Range)
+        testNumber = 0; // Nunca funcionará valiendo 0 (ha de ser 1-6 que se lo daré con Range)
 
         doTest = false;
 
@@ -47,6 +46,13 @@ public class CleanMonsterQuest : MonoBehaviour
         chordsSelection = new Dictionary<int, Chord>();
 
         doneTests = new List<int>();
+
+        // esto le llegará a defaultTest, de momento ponemos estos valores y luego quizá los inicializamos desde editor, mejor...
+        melancholicTest = new int[] { 1, 1, 1, 1, 5, 5, 5, 5, 4, 4, 4, 4, 3, 3, 3, 3, 2, 2, 2, 2 };
+        naughtyTest = new int[] { 2, 2, 2, 2, 1, 1, 1, 1, 5, 5, 5, 5, 4, 4, 4, 4, 3, 3, 3, 3 };
+        tenderTest = new int[] { 3, 3, 3, 3, 2, 2, 2, 2, 1, 1, 1, 1, 5, 5, 5, 5, 4, 4, 4, 4 };
+        cheerfulTest = new int[] { 4, 4, 4, 4, 3, 3, 3, 3, 2, 2, 2, 2, 1, 1, 1, 1, 5, 5, 5, 5 };
+        bizarreTest = new int[] { 5, 5, 5, 5, 4, 4, 4, 4, 3, 3, 3, 3, 2, 2, 2, 2, 1, 1, 1, 1 };
     }
 
 	void Update ()
@@ -81,6 +87,7 @@ public class CleanMonsterQuest : MonoBehaviour
             }
 
             doneTests.Add(testNumber);
+            doTest = false;
         }
 	}
 
@@ -107,9 +114,6 @@ public class CleanMonsterQuest : MonoBehaviour
             case 5:
                 defaultTest = bizarreTest;
                 break;
-            case 6:
-                defaultTest = sadTest;
-                break;
         }
 
         // Los scores de cada chord (20) se cambian a los del tipo de test que haya tocado en el switch
@@ -123,12 +127,24 @@ public class CleanMonsterQuest : MonoBehaviour
 
     public void ValidateTest()
     {
-        if(areAllSelected)
+        areAllSelected = true;
+
+        for (int i = 0; i < MAX_SELECTED_CHORDS; i++)
+        {
+            if (!chordsSelection.ContainsKey(i)) // En el momento en el que encuentre uno que no esté presente, expresado en la función ContainsKey(i)...
+            {
+                areAllSelected = false; // ... Pues pongo areAllSelected a false, porque hay al menos un hueco y por tanto se puede rellenar con otro valor
+            }
+        }
+
+        if (areAllSelected)
         {
             for (int i = 0; i < MAX_SELECTED_CHORDS; i++)
             {
-
+                playerScore += chordsSelection[i].score;
             }
+
+            print("Score: " + playerScore.ToString());
         }
     }
 
