@@ -18,11 +18,11 @@ public class CleanMonsterQuest : MonoBehaviour
 
     public bool doTest;
 
+    public bool areAllSelected;
+
     bool canValidateTest = false; // To trigger ValidateTest() method
 
     List<int> doneTests;
-
-    public Hashtable testPerIteration; // Con esta hashtable tendré un mapa de los tests que hay en cada una de las iteraciones (a cada una le corresponde un test)
 
     // Array para los scores que tiene cada chord en cada test
     int[] melancholicTest;
@@ -40,13 +40,13 @@ public class CleanMonsterQuest : MonoBehaviour
 
         doTest = false;
 
+        areAllSelected = false;
+
         chords = new List<Chord>();
 
         chordsSelection = new Dictionary<int, Chord>();
 
         doneTests = new List<int>();
-
-        testPerIteration = new Hashtable();
     }
 
 	void Update ()
@@ -54,7 +54,33 @@ public class CleanMonsterQuest : MonoBehaviour
 		if (doTest)
         {
             Debug.Log("Checking if test is already done!");
-            bool newTest = false;
+
+            bool newTest = false; // Para controlar que el test que se le asigne no haya aparecido ya antes
+
+            while (newTest == false) // Mientras no sea un test nuevo seguiré intentando generar uno nuevo
+            {
+                testNumber = Random.Range(1, 6);
+
+                if(doneTests.Count > 0)
+                {
+                    foreach(int test in doneTests) // Recorro la List de doneTests
+                    {
+                        if(testNumber != test) // Si el test generado no está en doneTests
+                        {
+                            newTest = true; // Entonces es un nuevo test!
+                        }
+                        else // Pero si encuentra una coincidencia
+                        {
+                            newTest = false; // Ya se ha usado!
+                            break; // Y break del foreach para que empiece de nuevo
+                        }
+                    }
+                }
+                else
+                    newTest = true;
+            }
+
+            doneTests.Add(testNumber);
         }
 	}
 
@@ -62,8 +88,6 @@ public class CleanMonsterQuest : MonoBehaviour
     {
         // Array de ints variable que usaré para machacarlo con los scores de los chords del tipo de test que toque
         int[] defaultTest = new int[MAX_CHORDS];
-
-        testNumber = Random.Range(1, 6);
 
         // Switch de cases de testNumber: un case por cada número de test (es decir, por cada iteración)
         switch (testNumber)
@@ -95,6 +119,17 @@ public class CleanMonsterQuest : MonoBehaviour
         }
 
         doTest = true;
+    }
+
+    public void ValidateTest()
+    {
+        if(areAllSelected)
+        {
+            for (int i = 0; i < MAX_SELECTED_CHORDS; i++)
+            {
+
+            }
+        }
     }
 
     private void Reset()

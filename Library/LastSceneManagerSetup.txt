@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Monster/MonsterInterface.unity
+- path: Assets/Monster/CleanMonsterQuest.unity
   isLoaded: 1
   isActive: 1
