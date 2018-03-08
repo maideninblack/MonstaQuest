@@ -194,5 +194,8 @@ public static class MonsterQuestLogic
     private static void Reset()
     {
         testNumber = 0;
+        // TODO
+        // Empty the selection dictionary
+        // Reset variables (including areAllSelected)
     }
 }
