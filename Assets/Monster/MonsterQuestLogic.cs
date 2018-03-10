@@ -7,6 +7,7 @@ public static class MonsterQuestLogic
     public  const int MAX_CHORDS = 20;
     public  const int MAX_SELECTED_CHORDS = 5;
     public  const int MAX_TESTS = 3;
+    public const int MINIMUM_SCORE = 7;
 
     public static int testNumber; // Variable que se randomizará para después generar el test
 
@@ -63,8 +64,7 @@ public static class MonsterQuestLogic
             areAllSelected = false;
             for (int i = 0; i < chords.Count; i++)
             {
-                chords[i].SwitchToggleOn();
-                Debug.Log("aix :P" + chords[i].id);
+                chords[i].SwitchToggleOn();     
             }
         }
 		if (doTest)
@@ -127,17 +127,16 @@ public static class MonsterQuestLogic
             for (int i = 0; i < chords.Count; i++)
             {
                 if(chords[i].isPressed)
-                chords[i].SwitchToggleOn();
-                Debug.Log("aix XD" + chords[i].id);
+                chords[i].SwitchToggleOn();      
             }
         }
 	}
 
-    static void TestGenerator(int testNumber)
+    public static void TestGenerator(int testNumber)
     {
         // Array de ints variable que usaré para machacarlo con los scores de los chords del tipo de test que toque
         int[] defaultTest = new int[MAX_CHORDS];
-
+        Debug.Log("Starting case " + testNumber);
         // Switch de cases de testNumber: un case por cada número de test (es decir, por cada iteración)
         switch (testNumber)
         {
@@ -171,13 +170,19 @@ public static class MonsterQuestLogic
     {
         if (areAllSelected)
         {
-            for (int i = 0; i < MAX_SELECTED_CHORDS; i++)
+            for (int i = 0; i < chordsSelection.Count; i++)
             {
+                chordsSelection[i].score = chords[i].score;
                 playerScore += chordsSelection[i].score;
             }
-
+            if (playerScore >= MINIMUM_SCORE)
+            {
+                Debug.Log("Congratulations!!! You passed!!");
+            }
+            else Debug.Log("Sorry, you are too bad...");
             Debug.Log("Score: " + playerScore.ToString());
         }
+        else Debug.Log("There are not 5 selected");
     }
 
     public static bool ChangeChordSelection(Chord chord)
@@ -208,11 +213,23 @@ public static class MonsterQuestLogic
         return areAllSelected;
     }
 
-    private static void Reset()
+    public static void Reset()
     {
         testNumber = 0;
         // TODO
         // Empty the selection dictionary
         // Reset variables (including areAllSelected)
+    }
+
+    public static void ResetButtons()
+    {
+        Debug.Log(chordsSelection.Count);
+        for (int i = 0; i < chords.Count; i++)
+        {
+            chords[i].chordToggle.isOn = false;
+            
+        }
+        chordsSelection.Clear();
+        Debug.Log("Selection cleared");
     }
 }

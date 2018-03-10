@@ -11,6 +11,7 @@ public class Ini : MonoBehaviour {
         MonsterQuestLogic.chords = publicChords;
         MonsterQuestLogic.Initialize();
         Debug.Log("Monster Quest initialized");
+        MonsterQuestLogic.TestGenerator(Random.Range(1, 5));
 	}
 
     private void Update()
@@ -18,4 +19,12 @@ public class Ini : MonoBehaviour {
         MonsterQuestLogic.MonsterQuestUpdate();
     }
 
+    public void ValidateTest()
+    {
+        MonsterQuestLogic.ValidateTest();
+    }
+    public void ResetButtons()
+    {
+        MonsterQuestLogic.ResetButtons();
+    }
 }
