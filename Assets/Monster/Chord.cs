@@ -9,22 +9,26 @@ public class Chord : MonoBehaviour
     public int score;
     public bool isPressed = false;
 
+   
+
     public Toggle chordToggle;
 
     public void Pressed()
     {
-        Debug.Log("Se ha pulsado " + id);
-        MonsterQuestLogic.ChangeChordSelection(id);
         isPressed = !isPressed;
+        Debug.Log("Se ha pulsado " + id);
+        MonsterQuestLogic.ChangeChordSelection(this);  
     }
 
     public void SwitchToggleOff()
     {
         chordToggle.interactable = false;
+        Debug.Log("Switching off: " + id);
     }
 
     public void SwitchToggleOn()
     {
         chordToggle.interactable = true;
+        Debug.Log("Switching on: " + id);
     }
 }

@@ -12,7 +12,7 @@ public static class MonsterQuestLogic
 
     public static int playerScore;
 
-    static List<Chord> chords; //  Chords ha de ser una List para poder usar el método Add()
+    public static List<Chord> chords; //  Chords ha de ser una List para poder usar el método Add()
 
     public static List<Chord> chordsSelection; // Diccionario de chords seleccionados, con su key (int)
 
@@ -32,7 +32,7 @@ public static class MonsterQuestLogic
     static int[] cheerfulTest;
     static int[] bizarreTest;
 
-    static void Start()
+    public static void Initialize()
     {
         playerScore = 0;
 
@@ -41,10 +41,9 @@ public static class MonsterQuestLogic
         doTest = false;
 
         areAllSelected = false;
-
-        chords = new List<Chord>();
-
+   
         chordsSelection = new List<Chord>();
+        Debug.Log("ChordSelection initialized");
 
         doneTests = new List<int>();
 
@@ -57,8 +56,17 @@ public static class MonsterQuestLogic
 
     }
 
-	static void Update ()
+	public static void MonsterQuestUpdate ()
     {
+        if(chordsSelection.Count < 5)
+        {
+            areAllSelected = false;
+            for (int i = 0; i < chords.Count; i++)
+            {
+                chords[i].SwitchToggleOn();
+                Debug.Log("aix :P" + chords[i].id);
+            }
+        }
 		if (doTest)
         {
             Debug.Log("Checking if test is already done!");
@@ -103,6 +111,24 @@ public static class MonsterQuestLogic
                     }
                     else chord.SwitchToggleOn();
                     }  
+            }
+        }
+        if (areAllSelected)
+        {
+            Debug.Log("Toggling all off: starting");
+            for(int i = 0; i < chords.Count; i++)
+            {
+                chords[i].SwitchToggleOff();
+                Debug.Log("aix " + chords[i].id);
+            }
+            Debug.Log("Toggling all off: done");
+
+
+            for (int i = 0; i < chords.Count; i++)
+            {
+                if(chords[i].isPressed)
+                chords[i].SwitchToggleOn();
+                Debug.Log("aix XD" + chords[i].id);
             }
         }
 	}
@@ -155,34 +181,29 @@ public static class MonsterQuestLogic
     }
 
     public static bool ChangeChordSelection(Chord chord)
-    {
-        bool isPressed = true;
-
-        foreach (Chord chord in chordsSelection)
+    {     
+        if (!chord.isPressed/*chordsSelection.Contains(chord)*/)
         {
-            if (chord.id.Equals(chordID))
+            chordsSelection.Remove(chord);
+            Debug.Log("Se quita: " + chord.id);
+        }
+
+       if (!areAllSelected)
+       {
+            if (chord.isPressed)
             {
-                chordsSelection.Remove(chord);
-                isPressed = false;
-                Debug.Log("Se borra: " + chordID);
+                chordsSelection.Add(chord);
+                Debug.Log("Se añade: " + chord.id);
             }
-        }
-
-        if (isPressed)
-        {
-                    foreach (Chord chord in chords) // por cada elemento o pointer del array... (el nombre chord se lo doy yo aquí en el foreach)
-                    {
-                        if (chord.id.Equals(chordID)) // cuando el ID del chord actual (el que está recorriendo el foreach in that moment) es igual que el que ha elegido el player
-                        {
-                            chordsSelection.Add(chord); // 
-                            Debug.Log("Se añade: " + chordID);
-                            break;
-                        }
-                    }
-        }
+       }
 
         if (chordsSelection.Count > 4)
+        {
             areAllSelected = true;
+            Debug.Log("All are selected");
+        }
+            
+        else areAllSelected = false;
 
         return areAllSelected;
     }
