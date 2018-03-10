@@ -219,6 +219,7 @@ public static class MonsterQuestLogic
         // TODO
         // Empty the selection dictionary
         // Reset variables (including areAllSelected)
+        // Reload scene¿?
     }
 
     public static void ResetButtons()
