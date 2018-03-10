@@ -2824,7 +2824,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 713315232}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 2109663825, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -2851,16 +2851,12 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 945844162}
-  toggleTransition: 1
-  graphic: {fileID: 908330499}
-  m_Group: {fileID: 0}
-  onValueChanged:
+  m_TargetGraphic: {fileID: 0}
+  m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  m_IsOn: 0
 --- !u!1 &715797588
 GameObject:
   m_ObjectHideFlags: 0
@@ -5116,7 +5112,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1430952033}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 2109663825, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -5143,16 +5139,23 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2146604482}
-  toggleTransition: 1
-  graphic: {fileID: 1609225933}
-  m_Group: {fileID: 0}
-  onValueChanged:
+  m_TargetGraphic: {fileID: 0}
+  m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
+      m_Calls:
+      - m_Target: {fileID: 1583211328}
+        m_MethodName: ValidateTest
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  m_IsOn: 0
 --- !u!1 &1496359296
 GameObject:
   m_ObjectHideFlags: 0
@@ -5391,6 +5394,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1848beebde914224998e7666d2d6bbac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  publicChords:
+  - {fileID: 2113357022}
+  - {fileID: 1037537195}
+  - {fileID: 1196510133}
+  - {fileID: 2025512649}
+  - {fileID: 105697781}
+  - {fileID: 1744420069}
+  - {fileID: 72855362}
+  - {fileID: 753634441}
+  - {fileID: 1072086649}
+  - {fileID: 821500393}
+  - {fileID: 1902835851}
+  - {fileID: 2060695058}
+  - {fileID: 1228562433}
+  - {fileID: 562344427}
+  - {fileID: 126498381}
+  - {fileID: 490118058}
+  - {fileID: 1421472996}
+  - {fileID: 1688925225}
+  - {fileID: 252857939}
+  - {fileID: 1336854962}
 --- !u!4 &1583211329
 Transform:
   m_ObjectHideFlags: 0
@@ -5516,7 +5540,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1628378622}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 2109663825, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -5543,16 +5567,23 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 715797590}
-  toggleTransition: 1
-  graphic: {fileID: 497705015}
-  m_Group: {fileID: 0}
-  onValueChanged:
+  m_TargetGraphic: {fileID: 0}
+  m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
+      m_Calls:
+      - m_Target: {fileID: 1583211328}
+        m_MethodName: ResetButtons
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  m_IsOn: 0
 --- !u!1 &1630373709
 GameObject:
   m_ObjectHideFlags: 0
