@@ -1,9 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Chord
+public class Chord : MonoBehaviour
 {
     public int id;
     public int score;
+    public bool isPressed = false;
+
+    public Toggle chordToggle;
+
+    public void Pressed()
+    {
+        Debug.Log("Se ha pulsado " + id);
+        MonsterQuestLogic.ChangeChordSelection(id);
+        isPressed = !isPressed;
+    }
+
+    public void SwitchToggleOff()
+    {
+        chordToggle.interactable = false;
+    }
+
+    public void SwitchToggleOn()
+    {
+        chordToggle.interactable = true;
+    }
 }

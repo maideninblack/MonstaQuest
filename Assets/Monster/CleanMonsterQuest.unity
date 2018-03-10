@@ -475,7 +475,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 708268676}
+      - m_Target: {fileID: 0}
         m_MethodName: Pressed
         m_Mode: 3
         m_Arguments:
@@ -709,7 +709,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 708268676}
+      - m_Target: {fileID: 0}
         m_MethodName: Pressed
         m_Mode: 3
         m_Arguments:
@@ -870,7 +870,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 708268676}
+      - m_Target: {fileID: 0}
         m_MethodName: Pressed
         m_Mode: 3
         m_Arguments:
@@ -1243,7 +1243,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 708268676}
+      - m_Target: {fileID: 0}
         m_MethodName: Pressed
         m_Mode: 3
         m_Arguments:
@@ -1905,7 +1905,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 708268676}
+      - m_Target: {fileID: 0}
         m_MethodName: Pressed
         m_Mode: 3
         m_Arguments:
@@ -2139,7 +2139,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 708268676}
+      - m_Target: {fileID: 0}
         m_MethodName: Pressed
         m_Mode: 3
         m_Arguments:
@@ -2639,7 +2639,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 708268675}
-  - component: {fileID: 708268676}
   m_Layer: 5
   m_Name: GridChords
   m_TagString: Untagged
@@ -2685,17 +2684,6 @@ RectTransform:
   m_AnchoredPosition: {x: -162.84998, y: 51.250015}
   m_SizeDelta: {x: -425.70004, y: -202.49997}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &708268676
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 708268674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aee6571805ff9614ea69d7e85f7fbec0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &713315232
 GameObject:
   m_ObjectHideFlags: 0
@@ -2924,7 +2912,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 708268676}
+      - m_Target: {fileID: 0}
         m_MethodName: Pressed
         m_Mode: 3
         m_Arguments:
@@ -3085,7 +3073,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 708268676}
+      - m_Target: {fileID: 0}
         m_MethodName: Pressed
         m_Mode: 3
         m_Arguments:
@@ -3884,7 +3872,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 708268676}
+      - m_Target: {fileID: 0}
         m_MethodName: Pressed
         m_Mode: 3
         m_Arguments:
@@ -4044,7 +4032,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 708268676}
+      - m_Target: {fileID: 0}
         m_MethodName: Pressed
         m_Mode: 3
         m_Arguments:
@@ -4427,7 +4415,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 708268676}
+      - m_Target: {fileID: 0}
         m_MethodName: Pressed
         m_Mode: 3
         m_Arguments:
@@ -4519,7 +4507,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 708268676}
+      - m_Target: {fileID: 0}
         m_MethodName: Pressed
         m_Mode: 3
         m_Arguments:
@@ -4754,7 +4742,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 708268676}
+      - m_Target: {fileID: 0}
         m_MethodName: Pressed
         m_Mode: 3
         m_Arguments:
@@ -4846,7 +4834,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 708268676}
+      - m_Target: {fileID: 0}
         m_MethodName: Pressed
         m_Mode: 3
         m_Arguments:
@@ -5584,7 +5572,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 708268676}
+      - m_Target: {fileID: 0}
         m_MethodName: Pressed
         m_Mode: 3
         m_Arguments:
@@ -5819,7 +5807,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 708268676}
+      - m_Target: {fileID: 0}
         m_MethodName: Pressed
         m_Mode: 3
         m_Arguments:
@@ -6396,7 +6384,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 708268676}
+      - m_Target: {fileID: 0}
         m_MethodName: Pressed
         m_Mode: 3
         m_Arguments:
@@ -6970,7 +6958,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 708268676}
+      - m_Target: {fileID: 0}
         m_MethodName: Pressed
         m_Mode: 3
         m_Arguments:
@@ -7199,7 +7187,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 708268676}
+      - m_Target: {fileID: 0}
         m_MethodName: Pressed
         m_Mode: 3
         m_Arguments:
@@ -7439,7 +7427,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 708268676}
+      - m_Target: {fileID: 0}
         m_MethodName: Pressed
         m_Mode: 3
         m_Arguments:

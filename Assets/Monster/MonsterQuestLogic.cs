@@ -14,7 +14,7 @@ public static class MonsterQuestLogic
 
     static List<Chord> chords; //  Chords ha de ser una List para poder usar el método Add()
 
-    public static Dictionary<int, Chord> chordsSelection; // Diccionario de chords seleccionados, con su key (int)
+    public static List<Chord> chordsSelection; // Diccionario de chords seleccionados, con su key (int)
 
     public static bool doTest;
 
@@ -44,7 +44,7 @@ public static class MonsterQuestLogic
 
         chords = new List<Chord>();
 
-        chordsSelection = new Dictionary<int, Chord>();
+        chordsSelection = new List<Chord>();
 
         doneTests = new List<int>();
 
@@ -90,6 +90,20 @@ public static class MonsterQuestLogic
 
             doneTests.Add(testNumber);
             doTest = false;
+
+            // Deshabilitar chords NO seleccionados cuando la selección está llena
+            if (areAllSelected)
+            {
+                foreach (Chord chord in chords)
+                    {
+                    if (!chord.isPressed)
+                    {
+                        chord.SwitchToggleOff();
+                        Debug.Log("Toggles disabled!");
+                    }
+                    else chord.SwitchToggleOn();
+                    }  
+            }
         }
 	}
 
@@ -129,7 +143,6 @@ public static class MonsterQuestLogic
 
     public static void ValidateTest()
     {
-
         if (areAllSelected)
         {
             for (int i = 0; i < MAX_SELECTED_CHORDS; i++)
@@ -141,15 +154,15 @@ public static class MonsterQuestLogic
         }
     }
 
-    public static bool ChangeChordSelection(int chordID)
+    public static bool ChangeChordSelection(Chord chord)
     {
         bool isPressed = true;
 
-        foreach (KeyValuePair<int, Chord> chordPair in chordsSelection)
+        foreach (Chord chord in chordsSelection)
         {
-            if (chordPair.Value.id.Equals(chordID))
+            if (chord.id.Equals(chordID))
             {
-                chordsSelection.Remove(chordPair.Key);
+                chordsSelection.Remove(chord);
                 isPressed = false;
                 Debug.Log("Se borra: " + chordID);
             }
@@ -157,36 +170,19 @@ public static class MonsterQuestLogic
 
         if (isPressed)
         {
-            for (int i = 0; i < MAX_SELECTED_CHORDS; i++)
-            {
-                if (!chordsSelection.ContainsKey(i))
-                {
                     foreach (Chord chord in chords) // por cada elemento o pointer del array... (el nombre chord se lo doy yo aquí en el foreach)
                     {
                         if (chord.id.Equals(chordID)) // cuando el ID del chord actual (el que está recorriendo el foreach in that moment) es igual que el que ha elegido el player
                         {
-                            chordsSelection.Add(i, chord); // i es la key (0, 1, 2, 3 o 4) y chord el value
+                            chordsSelection.Add(chord); // 
                             Debug.Log("Se añade: " + chordID);
                             break;
                         }
                     }
-                    break;
-                }
-            }
         }
 
-        int counter = 0;
-        for (int i = 0; i < MAX_SELECTED_CHORDS; i++)
-        {
-            if (chordsSelection.ContainsKey(i)) counter++;
-        }
-
-        if (counter > 4)
-        {
+        if (chordsSelection.Count > 4)
             areAllSelected = true;
-            // TODO
-            
-        }
 
         return areAllSelected;
     }
