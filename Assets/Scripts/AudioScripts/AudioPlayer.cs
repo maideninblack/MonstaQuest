@@ -101,11 +101,21 @@ public class AudioPlayer : MonoBehaviour
             }
         }
     }
-
+    // Tiene que ir en la clase donde esta el array de chords seleccionadas(monsterquest)
     IEnumerator WaitForEnd(float seconds)
     {
-        new WaitForSeconds(seconds);
-        yield return true;
+        int i = 0;
+        while(true)
+        {
+            //play sonidoaudioPlayer.Play(audioList[i]. asdasdas);
+            new WaitForSeconds(seconds); //sonido.lenght
+
+            //sonido++
+            //si ya no hayh mas sonidos, break;
+            yield return true;
+        }
+
+       
     }
    
 }
