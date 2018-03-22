@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 519a18213975a5d46ba2d80163ca3081
+timeCreated: 1513004366
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Geometr706 BlkCn BT
+  fontNames:
+  - Geometr706 BlkCn BT
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
