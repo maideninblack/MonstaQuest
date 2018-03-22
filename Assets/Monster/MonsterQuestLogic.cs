@@ -168,6 +168,7 @@ public static class MonsterQuestLogic
 
     public static void ValidateTest()
     {
+        // Meter la corrutina que esta en el audiomanager que playea todos los sonidos(al final de todo esto)
         if (areAllSelected)
         {
             for (int i = 0; i < chordsSelection.Count; i++)

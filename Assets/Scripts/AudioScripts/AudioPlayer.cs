@@ -93,11 +93,11 @@ public class AudioPlayer : MonoBehaviour
         for(int i = 0; i < 5; i++)
         {   if(i == 0)
             {
-                Play(audio[i])
+               // Play(audio[i]);
             }
             else
             {
-                WaitForEnd(audio[i].length)
+               // WaitForEnd(audio[i].length);
             }
         }
     }
