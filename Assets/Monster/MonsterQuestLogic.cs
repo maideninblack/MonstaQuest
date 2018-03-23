@@ -26,6 +26,8 @@ public static class MonsterQuestLogic
 
     static List<int> doneTests;
 
+    
+
 
     // Array para los scores que tiene cada chord en cada test
     static int[] melancholicTest;

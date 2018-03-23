@@ -27,4 +27,10 @@ public class Ini : MonoBehaviour {
     {
         MonsterQuestLogic.ResetButtons();
     }
+
+    public void Restart()
+    {
+        MonsterQuestLogic.Initialize();
+        MonsterQuestLogic.TestGenerator(Random.Range(1, 5));
+    }
 }

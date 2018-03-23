@@ -15,6 +15,7 @@ public class AudioPlayer : MonoBehaviour
     public AudioClip[] musicClips;
     private AudioSource musicSource;
     private AudioSource ambientSource;
+    private int counter = 0;
 
     #region SFX
     //3D
@@ -90,35 +91,32 @@ public class AudioPlayer : MonoBehaviour
         }
     }
 
-    public void Update()
-    {
-        if (playingAll)
-        {
-            PlayAll();
-        }
-    }
+   
 
-    private void PlayAll()
+    public void PlayAll()
     {
-        playingAll = true;
-        PlaySongs();
+        Debug.Log("Play all sfx");
+        counter = 0;
+        StartCoroutine(PlaySongs());
     }
     public IEnumerator PlaySongs()
     {
         
-        int i = 0;
-        while (true)
+       
+        Debug.Log("Entered while cycle");
+        while(counter <= 5)
         {
-            Debug.Log("playing song" + MonsterQuestLogic.chordsSelection[i].id);
-            PlaySFX(MonsterQuestLogic.chordsSelection[i].id - 1);
-            Debug.Log("playing song" + MonsterQuestLogic.chordsSelection[i].id);
-            new WaitForSeconds(sfxClips[i].length);
-            i++;
-            if (i > MonsterQuestLogic.chordsSelection.Count) break;
+            
+            PlaySFX(MonsterQuestLogic.chordsSelection[counter].id - 1 );
+            Debug.Log("playing selected " + MonsterQuestLogic.chordsSelection[counter].id);
+            counter++;
+            Debug.Log("Contador = " + counter);
+            yield return new WaitForSeconds(0.75f);
+            
         }
-
-        playingAll = false;
+       
         yield return null;
+
     }
     
    
