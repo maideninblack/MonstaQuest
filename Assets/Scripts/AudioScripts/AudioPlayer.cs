@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class AudioPlayer : MonoBehaviour
 {
+    public MonsterDialiogue monster;
     public enum MixerGroup { Master, Music, SFX };
     public MixerGroup mixerGroup;
     public AudioSource audio;
@@ -104,17 +105,26 @@ public class AudioPlayer : MonoBehaviour
         
        
         Debug.Log("Entered while cycle");
-        while(counter <= 5)
+        while(counter <= MonsterQuestLogic.chordsSelection.Count)
         {
             
             PlaySFX(MonsterQuestLogic.chordsSelection[counter].id - 1 );
             Debug.Log("playing selected " + MonsterQuestLogic.chordsSelection[counter].id);
             counter++;
             Debug.Log("Contador = " + counter);
-            yield return new WaitForSeconds(0.75f);
-            
+            yield return new WaitForSeconds(0.75f);  
         }
-       
+
+        if (MonsterQuestLogic.success && MonsterQuestLogic.chordsSelection.Count == 5 && counter >= 5)
+        {
+            Debug.Log("AAAAAAAAAAAAAAAAAA");
+            monster.TriggerEndDialogue();
+        }
+        else if(MonsterQuestLogic.success && MonsterQuestLogic.chordsSelection.Count == 5)
+        {
+            Debug.Log("AAAAAAAAAAAAAAAAAA");
+            monster.TriggerEndDialogue();
+        }
         yield return null;
 
     }

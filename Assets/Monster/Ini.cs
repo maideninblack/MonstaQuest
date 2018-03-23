@@ -5,6 +5,8 @@ using UnityEngine;
 public class Ini : MonoBehaviour {
 
     public List<Chord> publicChords;
+    public MonsterDialiogue monster;
+    public bool dialogueIni = false;
 	// Use this for initialization
 	void Start () {
         
@@ -12,16 +14,29 @@ public class Ini : MonoBehaviour {
         MonsterQuestLogic.Initialize();
         Debug.Log("Monster Quest initialized");
         MonsterQuestLogic.TestGenerator(Random.Range(1, 5));
+        
 	}
 
     private void Update()
     {
+        if (!dialogueIni)
+        {
+            monster.TriggerStartDialogue();
+            dialogueIni = true;
+        }
         MonsterQuestLogic.MonsterQuestUpdate();
+    }
+
+    public void IniDialogue()
+    {
+        monster.TriggerStartDialogue();
     }
 
     public void ValidateTest()
     {
-        MonsterQuestLogic.ValidateTest();
+        //MonsterQuestLogic.ValidateTest();  
+        StartCoroutine(Test());
+        
     }
     public void ResetButtons()
     {
@@ -32,5 +47,14 @@ public class Ini : MonoBehaviour {
     {
         MonsterQuestLogic.Initialize();
         MonsterQuestLogic.TestGenerator(Random.Range(1, 5));
+        IniDialogue();
+        dialogueIni = false;
+    }
+
+    IEnumerator Test()
+    {
+        yield return new WaitForSeconds(3);
+        MonsterQuestLogic.ValidateTest();
+        monster.TriggerEndDialogue();
     }
 }

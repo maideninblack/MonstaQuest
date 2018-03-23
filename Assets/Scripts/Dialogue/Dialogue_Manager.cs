@@ -5,20 +5,20 @@ using UnityEngine.UI;
 
 public class Dialogue_Manager : MonoBehaviour {
 
-    public Text nameText;
+    //public Text nameText;
     public Text dialogueText;
 
-    public Animator animator;
+    //public Animator animator;
 
     private Queue<string> sentences; // (FIFO collection, first in first out) Variable that keeps track of all the sentences in our dialogue
 
     public bool justEndDialogue = false;
     
-    Script_HideCursor cursor;
+    //Script_HideCursor cursor;
 
 
    // public CinemachineBehaviour cineMachine;
-    public Animator cineMachineAnim;
+    //public Animator cineMachineAnim;
 
 
     
@@ -26,25 +26,27 @@ public class Dialogue_Manager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         sentences = new Queue<string>(); // Initialize variable
-        cursor = GetComponent<Script_HideCursor>();
+        Debug.Log("sentences initialized");
+        //cursor = GetComponent<Script_HideCursor>();
 	}
 	
 	
 
     public void StartDialogue (Dialogue dialogue)
     {
-        cineMachineAnim.SetBool("IsActive", true);
+        //cineMachineAnim.SetBool("IsActive", true);
         //cineMachine.Play();
         
-        cursor.ShowCursor();
+        //cursor.ShowCursor();
         
-        animator.SetBool("IsOpen", true);
+        //animator.SetBool("IsOpen", true);
 
-        Debug.Log("Starting conversation with" + dialogue.name);
+        //Debug.Log("Starting conversation with" + dialogue.name);
 
-        nameText.text = dialogue.name;
+        //nameText.text = dialogue.name;
 
         sentences.Clear();
+        Debug.Log("Cleared");
 
         foreach (string sentence in dialogue.sentences)
         {
@@ -56,6 +58,7 @@ public class Dialogue_Manager : MonoBehaviour {
 
     public void DisplayNextSentence()
     {
+        EndDialogue();
         /*  if (sentences.Count == 1)
           {
               justEndDialogue = true;
@@ -80,7 +83,7 @@ public class Dialogue_Manager : MonoBehaviour {
 
     IEnumerator TypeSentence (string sentence)
     {
-        dialogueText.text = "";
+       // dialogueText.text = "";
         foreach(char letter in sentence.ToCharArray())
         {
             dialogueText.text += letter;
@@ -90,13 +93,14 @@ public class Dialogue_Manager : MonoBehaviour {
     
     public void EndDialogue()
     {
+        dialogueText.text = null;
         justEndDialogue = true;
-        cursor.HideCursor();
+        //cursor.HideCursor();
         
         Debug.Log("End of conversation");
-        animator.SetBool("IsOpen", false);
+       // animator.SetBool("IsOpen", false);
 
-        cineMachineAnim.SetBool("IsActive", false);
+        //cineMachineAnim.SetBool("IsActive", false);
 
     }
 }

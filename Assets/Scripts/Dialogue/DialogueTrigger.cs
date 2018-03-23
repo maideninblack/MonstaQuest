@@ -5,13 +5,13 @@ using UnityEngine;
 public class DialogueTrigger : MonoBehaviour {
 
     public Dialogue dialogue;        
-    public Sprite characterSprite;
+    //public Sprite characterSprite;
     public Dialogue_Manager dManager;
-    public Sprite nameSprite;
+    //public Sprite nameSprite;
 
     private void Start()
     {
-       dialogue.Initialize();
+       
        dManager = GetComponent<Dialogue_Manager>();
     }
     
@@ -22,7 +22,7 @@ public class DialogueTrigger : MonoBehaviour {
     {
         FindObjectOfType<Dialogue_Manager>().StartDialogue(dialogue);
         //Dialogue.textImage.sprite = characterSprite;
-        dialogue.nameImage = nameSprite;
+        //dialogue.nameImage = nameSprite;
     }
 
 }

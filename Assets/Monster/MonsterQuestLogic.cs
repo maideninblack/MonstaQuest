@@ -26,6 +26,8 @@ public static class MonsterQuestLogic
 
     static List<int> doneTests;
 
+    public static bool success = false;
+
     
 
 
@@ -182,8 +184,13 @@ public static class MonsterQuestLogic
             if (playerScore >= MINIMUM_SCORE)
             {
                 Debug.Log("Congratulations!!! You passed!!");
+                success = true;
             }
-            else Debug.Log("Sorry, you are too bad...");
+            else
+            {
+                Debug.Log("Sorry, you are too bad...");
+                success = false;
+            }
             Debug.Log("Score: " + playerScore.ToString());
         }
         else Debug.Log("There are not 5 selected");
