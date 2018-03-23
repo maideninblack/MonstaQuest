@@ -55,6 +55,10 @@ public class Ini : MonoBehaviour {
     {
         yield return new WaitForSeconds(3);
         MonsterQuestLogic.ValidateTest();
-        monster.TriggerEndDialogue();
+        if(MonsterQuestLogic.chordsSelection.Count == 5)
+        {
+            monster.TriggerEndDialogue();
+        }
+        
     }
 }
