@@ -64,6 +64,11 @@ public class LevelManager : MonoBehaviour
 
     }
 
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
     IEnumerator WaitForTime()
     {
         loading = true;

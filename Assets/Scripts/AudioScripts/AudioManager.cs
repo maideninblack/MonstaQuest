@@ -10,7 +10,8 @@ public static class AudioManager
     public static void Initialize()
     {
         mainMixer = Resources.Load("AudioMixers/MainMixer") as AudioMixer;
-        SetSnapshot("MainSnap",0);
+        Debug.Log("mixer initialized" + mainMixer);
+        SetSnapshot("Snapshot",0);
         Debug.Log("Audio Mixer initialized: " + mainMixer.name + "\nCurrent Snapshot: " + currentSnapshot.name);
     }
 

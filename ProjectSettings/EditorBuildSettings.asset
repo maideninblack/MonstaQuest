@@ -4,4 +4,13 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Build Scenes/Logo.unity
+    guid: 85a3aad20f38304429306253d094c0dd
+  - enabled: 1
+    path: Assets/Scenes/Build Scenes/MainTitle.unity
+    guid: 2f948330c9d848b44bcf760edacfade3
+  - enabled: 1
+    path: Assets/Monster/CleanMonsterQuest.unity
+    guid: 2b9d84c2984c779449444fe1b159061c

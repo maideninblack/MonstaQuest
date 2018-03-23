@@ -9,6 +9,7 @@ public static class MonsterQuestLogic
     public  const int MAX_TESTS = 3;
     public const int MINIMUM_SCORE = 7;
 
+
     public static int testNumber; // Variable que se randomizará para después generar el test
 
     public static int playerScore;
@@ -119,7 +120,7 @@ public static class MonsterQuestLogic
             for(int i = 0; i < chords.Count; i++)
             {
                 chords[i].SwitchToggleOff();
-                Debug.Log("aix " + chords[i].id);
+               
             }
             Debug.Log("Toggling all off: done");
 
@@ -184,6 +185,8 @@ public static class MonsterQuestLogic
             Debug.Log("Score: " + playerScore.ToString());
         }
         else Debug.Log("There are not 5 selected");
+
+     
     }
 
     public static bool ChangeChordSelection(Chord chord)
@@ -234,4 +237,6 @@ public static class MonsterQuestLogic
         chordsSelection.Clear();
         Debug.Log("Selection cleared");
     }
+
+    
 }

@@ -7,6 +7,8 @@ public class AudioPlayer : MonoBehaviour
 {
     public enum MixerGroup { Master, Music, SFX };
     public MixerGroup mixerGroup;
+    public AudioSource audio;
+    [SerializeField]private bool playingAll = false;
     
     public AudioClip[] sfxClips;
     public AudioClip[] ambientClips;
@@ -86,36 +88,38 @@ public class AudioPlayer : MonoBehaviour
                 ambientSource = source;
             }
         }
-    } 
-
-    public void TrainPlay()
-    {
-        for(int i = 0; i < 5; i++)
-        {   if(i == 0)
-            {
-               // Play(audio[i]);
-            }
-            else
-            {
-               // WaitForEnd(audio[i].length);
-            }
-        }
     }
-    // Tiene que ir en la clase donde esta el array de chords seleccionadas(monsterquest)
-    IEnumerator WaitForEnd(float seconds)
+
+    public void Update()
     {
-        int i = 0;
-        while(true)
+        if (playingAll)
         {
-            //play sonidoaudioPlayer.Play(audioList[i]. asdasdas);
-            new WaitForSeconds(seconds); //sonido.lenght
+            PlayAll();
+        }
+    }
 
-            //sonido++
-            //si ya no hayh mas sonidos, break;
-            yield return true;
+    private void PlayAll()
+    {
+        playingAll = true;
+        PlaySongs();
+    }
+    public IEnumerator PlaySongs()
+    {
+        
+        int i = 0;
+        while (true)
+        {
+            Debug.Log("playing song" + MonsterQuestLogic.chordsSelection[i].id);
+            PlaySFX(MonsterQuestLogic.chordsSelection[i].id - 1);
+            Debug.Log("playing song" + MonsterQuestLogic.chordsSelection[i].id);
+            new WaitForSeconds(sfxClips[i].length);
+            i++;
+            if (i > MonsterQuestLogic.chordsSelection.Count) break;
         }
 
-       
+        playingAll = false;
+        yield return null;
     }
+    
    
 }

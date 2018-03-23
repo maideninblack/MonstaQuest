@@ -23,7 +23,7 @@ public class Chord : MonoBehaviour
     public void SwitchToggleOff()
     {
         chordToggle.interactable = false;
-        //Debug.Log("Switching off: " + id);
+        
     }
 
     public void SwitchToggleOn()
