@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FadeInOut : MonoBehaviour {
 
@@ -18,7 +19,7 @@ public class FadeInOut : MonoBehaviour {
 
     public float startDelay;
 
-    public RectTransform rectTransform;
+    public Image blackScreen;
 
     private void Update()
     {            // Al final un easing se hace con un contador de tiempo
@@ -27,7 +28,7 @@ public class FadeInOut : MonoBehaviour {
         if (currentTime <= timeDuration) // Mientras el momento actual sea menor o igual se hará esto
         {
             // Do easing
-            Vector2 easingValue = iniValue;
+            float easingValue = iniValue;
             if (startDelay > 0) //Cuenta atras
             {
                 startDelay -= Time.deltaTime;
@@ -37,46 +38,38 @@ public class FadeInOut : MonoBehaviour {
             switch (easings)
             {
                 case Easings.expo:
-                    easingValue = new Vector2(Easing.ExpoEaseInOut(currentTime, iniValue.x, deltaValue.x, timeDuration),
-                                    Easing.ExpoEaseInOut(currentTime, iniValue.y, deltaValue.y, timeDuration));
+                    easingValue = (Easing.ExpoEaseInOut(currentTime, iniValue, deltaValue, timeDuration));
+                                 
                     break;
                 case Easings.circ:
-                    easingValue = new Vector2(Easing.CircEaseInOut(currentTime, iniValue.x, deltaValue.x, timeDuration),
-                                    Easing.CircEaseInOut(currentTime, iniValue.y, deltaValue.y, timeDuration));
+                    easingValue = (Easing.CircEaseInOut(currentTime, iniValue, deltaValue, timeDuration));
                     break;
                 case Easings.quint:
-                    easingValue = new Vector2(Easing.QuintEaseInOut(currentTime, iniValue.x, deltaValue.x, timeDuration),
-                                    Easing.QuintEaseInOut(currentTime, iniValue.y, deltaValue.y, timeDuration));
+                    easingValue = (Easing.QuintEaseInOut(currentTime, iniValue, deltaValue, timeDuration));
                     break;
                 case Easings.quart:
-                    easingValue = new Vector2(Easing.QuartEaseInOut(currentTime, iniValue.x, deltaValue.x, timeDuration),
-                                    Easing.QuartEaseInOut(currentTime, iniValue.y, deltaValue.y, timeDuration));
+                    easingValue = (Easing.QuartEaseInOut(currentTime, iniValue, deltaValue, timeDuration));
                     break;
                 case Easings.quad:
-                    easingValue = new Vector2(Easing.QuadEaseInOut(currentTime, iniValue.x, deltaValue.x, timeDuration),
-                                    Easing.QuadEaseInOut(currentTime, iniValue.y, deltaValue.y, timeDuration));
+                    easingValue = (Easing.QuadEaseInOut(currentTime, iniValue, deltaValue, timeDuration));
                     break;
                 case Easings.sine:
-                    easingValue = new Vector2(Easing.SineEaseInOut(currentTime, iniValue.x, deltaValue.x, timeDuration),
-                                    Easing.SineEaseInOut(currentTime, iniValue.y, deltaValue.y, timeDuration));
+                    easingValue = (Easing.SineEaseInOut(currentTime, iniValue, deltaValue, timeDuration));
                     break;
                 case Easings.back:
-                    easingValue = new Vector2(Easing.BackEaseInOut(currentTime, iniValue.x, deltaValue.x, timeDuration),
-                                    Easing.BackEaseInOut(currentTime, iniValue.y, deltaValue.y, timeDuration));
+                    easingValue = (Easing.BackEaseInOut(currentTime, iniValue, deltaValue, timeDuration));
                     break;
                 case Easings.bounce:
-                    easingValue = new Vector2(Easing.BounceEaseInOut(currentTime, iniValue.x, deltaValue.x, timeDuration),
-                                    Easing.BounceEaseInOut(currentTime, iniValue.y, deltaValue.y, timeDuration));
+                    easingValue = (Easing.BounceEaseInOut(currentTime, iniValue, deltaValue, timeDuration));
                     break;
                 case Easings.elastic:
-                    easingValue = new Vector2(Easing.ElasticEaseInOut(currentTime, iniValue.x, deltaValue.x, timeDuration),
-                                    Easing.ElasticEaseInOut(currentTime, iniValue.y, deltaValue.y, timeDuration));
+                    easingValue = (Easing.ElasticEaseInOut(currentTime, iniValue, deltaValue, timeDuration));
                     break;
                 default:
                     break;
             }
 
-            rectTransform.localPosition = easingValue;
+            blackScreen.color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, easingValue);
 
             // Contador tiempo
             currentTime += Time.deltaTime;
@@ -84,13 +77,13 @@ public class FadeInOut : MonoBehaviour {
             if (currentTime > timeDuration) // En este momento se ha de acabar el easing
             {
                 Debug.Log("El easing acaba de terminar justo ahora");
-                rectTransform.localPosition = finalValue;
+                blackScreen.color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, finalValue);
 
                 // Esto para que haga el efecto de ping pong, si no no hace falta, ya ha acabado
                 if (pingPong)
                 {
                     currentTime = 0;
-                    Vector2 ini = iniValue;
+                   float ini = iniValue;
                     iniValue = finalValue;
                     finalValue = ini;
                     deltaValue = finalValue - iniValue;
