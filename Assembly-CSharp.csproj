@@ -51,9 +51,35 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Easings\ColorChange.cs" />
+     <Compile Include="Assets\Easings\Easing.cs" />
+     <Compile Include="Assets\Easings\EasingPos2D.cs" />
+     <Compile Include="Assets\Easings\FadeInOut.cs" />
+     <Compile Include="Assets\Easings\Position.cs" />
+     <Compile Include="Assets\Easings\Rotation.cs" />
+     <Compile Include="Assets\Easings\Size.cs" />
      <Compile Include="Assets\Monster\Chord.cs" />
+     <Compile Include="Assets\Monster\Ini.cs" />
      <Compile Include="Assets\Monster\MonsterQuestLogic.cs" />
      <Compile Include="Assets\Monster\OkPress.cs" />
+     <Compile Include="Assets\Scripts\AudioScripts\AudioManager.cs" />
+     <Compile Include="Assets\Scripts\AudioScripts\AudioPlayer.cs" />
+     <Compile Include="Assets\Scripts\AudioScripts\SetVolume.cs" />
+     <Compile Include="Assets\Scripts\Dialogue\Dialogue.cs" />
+     <Compile Include="Assets\Scripts\Dialogue\Dialogue_Manager.cs" />
+     <Compile Include="Assets\Scripts\Dialogue\DialogueTrigger.cs" />
+     <Compile Include="Assets\Scripts\Dialogue\MonsterDialiogue.cs" />
+     <Compile Include="Assets\Scripts\ES_EN.cs" />
+     <Compile Include="Assets\Scripts\Initialize.cs" />
+     <Compile Include="Assets\Scripts\LogoCounter.cs" />
+     <Compile Include="Assets\Scripts\Menu\ChangeResolution.cs" />
+     <Compile Include="Assets\Scripts\Menu\MainMenu.cs" />
+     <Compile Include="Assets\Scripts\Menu\Pause.cs" />
+     <Compile Include="Assets\Scripts\Menu\SetActive.cs" />
+     <Compile Include="Assets\Scripts\PlaySound.cs" />
+     <Compile Include="Assets\Scripts\Scene Manager\LevelManager.cs" />
+     <Compile Include="Assets\Scripts\Scene Manager\Transitions.cs" />
+     <Compile Include="Assets\Scripts\Script_HideCursor.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
