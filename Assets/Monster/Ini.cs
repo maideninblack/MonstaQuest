@@ -34,7 +34,7 @@ public class Ini : MonoBehaviour {
 
     public void ValidateTest()
     {
-        //MonsterQuestLogic.ValidateTest();  
+        MonsterQuestLogic.ValidateTest();  
         StartCoroutine(Test());
         
     }

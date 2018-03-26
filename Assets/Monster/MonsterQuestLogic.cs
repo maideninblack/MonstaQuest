@@ -7,7 +7,7 @@ public static class MonsterQuestLogic
     public  const int MAX_CHORDS = 20;
     public  const int MAX_SELECTED_CHORDS = 5;
     public  const int MAX_TESTS = 3;
-    public const int MINIMUM_SCORE = 7;
+    public const int MINIMUM_SCORE = 20;
 
 
     public static int testNumber; // Variable que se randomizará para después generar el test
@@ -176,10 +176,12 @@ public static class MonsterQuestLogic
         // Meter la corrutina que esta en el audiomanager que playea todos los sonidos(al final de todo esto)
         if (areAllSelected)
         {
+            
             for (int i = 0; i < chordsSelection.Count; i++)
             {
                 chordsSelection[i].score = chords[i].score;
                 playerScore += chordsSelection[i].score;
+                Debug.Log("score = " + playerScore);
             }
             if (playerScore >= MINIMUM_SCORE)
             {
