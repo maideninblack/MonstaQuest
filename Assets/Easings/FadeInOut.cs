@@ -21,7 +21,11 @@ public class FadeInOut : MonoBehaviour {
 
     public Image blackScreen;
 
-    private void Update()
+    private void Start()
+    {
+        deltaValue = finalValue - iniValue;
+    }
+    public void Update()
     {            // Al final un easing se hace con un contador de tiempo
                  // Easing - hay que calcularlos cada frame, porque si no nos daría un solo valor
 
@@ -68,7 +72,7 @@ public class FadeInOut : MonoBehaviour {
                 default:
                     break;
             }
-
+            Debug.Log("easing value = " + easingValue);
             blackScreen.color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, easingValue);
 
             // Contador tiempo
