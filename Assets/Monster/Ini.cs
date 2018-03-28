@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Ini : MonoBehaviour {
 
@@ -60,5 +61,10 @@ public class Ini : MonoBehaviour {
             monster.TriggerEndDialogue();
         }
         
+    }
+
+    public void LoadEndScene()
+    {
+        SceneManager.LoadScene(4);
     }
 }

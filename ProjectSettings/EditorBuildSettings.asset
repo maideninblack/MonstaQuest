@@ -17,3 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Monster/CleanMonsterQuest.unity
     guid: 2b9d84c2984c779449444fe1b159061c
+  - enabled: 1
+    path: Assets/Scenes/Build Scenes/EndScene.unity
+    guid: 50936523472a4354ab32873e8aeb8304
